@@ -10,3 +10,37 @@ class Customer(models.Model):
     PhoneNumber = models.CharField(max_length=12, null=True)
     Username = models.CharField(max_length=255, null=True)
 
+
+class Airplane(models.Model):
+    ID = models.IntegerField(primary_key=True)
+    Agentie = models.CharField(max_length=255, null=True)
+    Destinatie = models.CharField(max_length=255, null=True)
+    Pret = models.IntegerField()
+
+
+class Hotel(models.Model):
+    ID = models.IntegerField(primary_key=True)
+    Nume = models.CharField(max_length=255, null=True)
+    Locatie = models.CharField(max_length=255, null=True)
+    Adresa = models.CharField(max_length=255, null=True)
+    PretNoapte = models.IntegerField()
+
+
+class Holiday(models.Model):
+    ID = models.IntegerField(primary_key=True)
+    Destinatie = models.CharField(max_length=255, null=True)
+    Hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
+    Avion = models.ForeignKey(Airplane, on_delete=models.CASCADE)
+    Pret = models.IntegerField()
+
+
+class Book(models.Model):
+    ID = models.IntegerField(primary_key=True)
+    Destinatie = models.CharField(max_length=255, null=True)
+    Hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
+    Avion = models.ForeignKey(Airplane, on_delete=models.CASCADE)
+    DataInceperii = models.DateField()
+    Durata = models.CharField(max_length=255, null=True)
+    NrAdulti = models.CharField(max_length=255, null=True)
+    NrCopii = models.CharField(max_length=255, null=True)
+    Pret = models.IntegerField()
